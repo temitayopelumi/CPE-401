@@ -28,24 +28,27 @@ def L_xor(a, b):
 
 # Adder
 
-def Adder():
-    a = [0, 0, 0, 0]
-    b = [0, 0, 0, 0]
+def Adder(a, b):
     c = [0, 0, 0, 0]
-    for i in range (0, 4):
-        a_bit = int (input ('Enter First Binary Sequence'))
-        a[i] = a_bit
-    for i in range (0, 4):
-        b_bit = int (input ('Enter Second Binary Sequence '))
-        b[i] = b_bit
-    carry = 0
-    for i in range (3, -1, -1):
-        c[i] = L_xor (L_xor (a[i], b[i], ), carry)
-        carry = L_or (L_and (a[i], b[i]), L_and (L_xor (a[i], b[i]), carry))
-    return carry, c
+    if (len(a) and len(b)) <= 4:
+        carry = 0
+        for i in range (3, -1, -1):
+            c[i] = L_xor (L_xor (int(a[i]), int(b[i]), ), carry)
+            carry = L_or (L_and (int(a[i]), int(b[i])), L_and (L_xor (int(a[i]), int(b[i])), carry))
+        return carry, c
+    else:
+        return 'Bits greater than 4'
 
-
+#main code
 if __name__ == '__main__':
-    k = Adder ()
-    print ('_________________________')
+    f=str(input('Enter First Binary Sequence '))
+    s=str(input('Enter Second Binary Seuence '))
+    a=list(str(f))
+    b=list(str(s))
+    k = Adder (a, b)
+    print('The sum is of')
+    print(f)
+    print('+')
+    print(s)
+    print ('===========================')
     print (k)
